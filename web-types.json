@@ -1,0 +1,145 @@
+{
+  "framework": "vue",
+  "name": "posts-vue",
+  "version": "0.1.0",
+  "contributions": {
+    "html": {
+      "description-markup": "markdown",
+      "types-syntax": "typescript",
+      "tags": [
+        {
+          "name": "MyButton",
+          "description": "",
+          "attributes": [
+            {
+              "name": "customClass",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              },
+              "default": "''"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default"
+            }
+          ],
+          "source": {
+            "module": "./src/components/UI/MyButton.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "MyInput",
+          "description": "",
+          "attributes": [
+            {
+              "name": "modelValue",
+              "value": {
+                "kind": "expression",
+                "type": "string|number"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "update:modelValue"
+            }
+          ],
+          "source": {
+            "module": "./src/components/UI/MyInput.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "MyModal",
+          "description": "",
+          "attributes": [
+            {
+              "name": "show",
+              "value": {
+                "kind": "expression",
+                "type": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "events": [
+            {
+              "name": "update:show"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default"
+            }
+          ],
+          "source": {
+            "module": "./src/components/UI/MyModal.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "PostForm",
+          "description": "",
+          "events": [
+            {
+              "name": "create"
+            }
+          ],
+          "source": {
+            "module": "./src/components/PostForm.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "PostItem",
+          "description": "",
+          "attributes": [
+            {
+              "name": "post",
+              "required": true,
+              "value": {
+                "kind": "expression",
+                "type": "object"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "remove"
+            }
+          ],
+          "source": {
+            "module": "./src/components/PostItem.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "PostsList",
+          "description": "",
+          "attributes": [
+            {
+              "name": "posts",
+              "required": true,
+              "value": {
+                "kind": "expression",
+                "type": "array"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "remove"
+            }
+          ],
+          "source": {
+            "module": "./src/components/PostsList.vue",
+            "symbol": "default"
+          }
+        }
+      ]
+    }
+  }
+}

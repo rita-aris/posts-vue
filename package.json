@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "update-web-types": "vue-docgen-web-types"
   },
+  "web-types": "./web-types.json",
   "dependencies": {
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
+    "vue-docgen-web-types": "^0.1.8",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
   },
