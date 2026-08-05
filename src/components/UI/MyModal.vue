@@ -3,7 +3,6 @@
     <div class="modal__content" @click.stop>
       <slot></slot>
     </div>
-
   </div>
 </template>
 
