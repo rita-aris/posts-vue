@@ -30,8 +30,9 @@ export default {
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0, 34, 102, 0.5);
+  z-index: 1;
   display: flex;
+  background-color: rgba(0, 34, 102, 0.5);
 }
 .modal__content {
   background-color: #ffffff;
