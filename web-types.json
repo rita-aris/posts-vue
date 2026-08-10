@@ -89,6 +89,36 @@
           }
         },
         {
+          "name": "MySelect",
+          "description": "",
+          "attributes": [
+            {
+              "name": "modelValue",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "options",
+              "value": {
+                "kind": "expression",
+                "type": "array"
+              },
+              "default": "[]"
+            }
+          ],
+          "events": [
+            {
+              "name": "update:modelValue"
+            }
+          ],
+          "source": {
+            "module": "./src/components/UI/MySelect.vue",
+            "symbol": "default"
+          }
+        },
+        {
           "name": "PostForm",
           "description": "",
           "events": [

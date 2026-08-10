@@ -23,6 +23,6 @@ export default {
 
 <style scoped>
 .posts-list {
-  margin-bottom: 30px;
+  margin-top: 30px;
 }
 </style>

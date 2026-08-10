@@ -1,11 +1,14 @@
 <template>
   <div class="app">
+    <div class="top-bar">
+    <MyButton @click="showModal">Создать пост</MyButton>
+    <MySelect v-model="selectedSort" :options="sortOptions" />
+    </div>
     <MyModal v-model:show="isModalVisible">
       <PostForm @create="createPost" />
     </MyModal>
-    <PostsList :posts="posts" @remove="removePost" v-if="!isPostsLoading" />
+    <PostsList :posts="sortedPosts" @remove="removePost" v-if="!isPostsLoading" />
     <MyLoader v-else></MyLoader>
-    <MyButton @click="showModal">Создать пост</MyButton>
   </div>
 </template>
 
@@ -14,17 +17,25 @@ import PostForm from "@/components/PostForm.vue";
 import PostsList from "@/components/PostsList.vue";
 import MyModal from "@/components/UI/MyModal.vue";
 import MyLoader from "@/components/UI/MyLoader.vue";
+import MySelect from "@/components/UI/MySelect.vue";
 export default {
   components: {
+    MySelect,
     MyLoader,
     MyModal,
-    PostForm, PostsList
+    PostForm,
+    PostsList
   },
   data() {
     return {
       posts: [],
       isModalVisible: false,
       isPostsLoading: false,
+      selectedSort: '',
+      sortOptions: [
+        {value: 'title', name: 'По названию'},
+        {value: 'body', name: 'По описанию'},
+      ]
     }
   },
   methods: {
@@ -52,7 +63,16 @@ export default {
   },
   mounted() {
     this.fetchPosts();
-  }
+  },
+  computed: {
+    sortedPosts() {
+      if (this.selectedSort) {
+        return [...this.posts].sort((p1, p2) => p1[this.selectedSort].localeCompare(p2[this.selectedSort]));
+      }
+      return this.posts;
+    }
+  },
+  watch: {}
 }
 </script>
 
@@ -74,5 +94,17 @@ body {
   height: 100%;
   padding: 20px;
   margin: 0 auto;
+}
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+@media screen and (max-width: 480px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 </style>
