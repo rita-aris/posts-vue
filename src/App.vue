@@ -1,28 +1,24 @@
 <template>
   <div class="app">
+    <h1>Страница с постами</h1>
     <div class="top-bar">
-    <MyButton @click="showModal">Создать пост</MyButton>
-    <MySelect v-model="selectedSort" :options="sortOptions" />
+      <MyInput customClass="input_search" placeholder="Поиск по названию..." v-model="searchQuery" />
+      <MyButton @click="showModal">Создать пост</MyButton>
+      <MySelect v-model="selectedSort" :options="sortOptions" v-if="sortedAndSearchedPosts.length > 0" />
     </div>
     <MyModal v-model:show="isModalVisible">
       <PostForm @create="createPost" />
     </MyModal>
-    <PostsList :posts="sortedPosts" @remove="removePost" v-if="!isPostsLoading" />
-    <MyLoader v-else></MyLoader>
+    <PostsList :posts="sortedAndSearchedPosts" @remove="removePost" v-if="!isPostsLoading" :searchQuery="searchQuery" />
+    <MyLoader v-else />
   </div>
 </template>
 
 <script>
 import PostForm from "@/components/PostForm.vue";
 import PostsList from "@/components/PostsList.vue";
-import MyModal from "@/components/UI/MyModal.vue";
-import MyLoader from "@/components/UI/MyLoader.vue";
-import MySelect from "@/components/UI/MySelect.vue";
 export default {
   components: {
-    MySelect,
-    MyLoader,
-    MyModal,
     PostForm,
     PostsList
   },
@@ -31,6 +27,7 @@ export default {
       posts: [],
       isModalVisible: false,
       isPostsLoading: false,
+      searchQuery: '',
       selectedSort: '',
       sortOptions: [
         {value: 'title', name: 'По названию'},
@@ -70,6 +67,12 @@ export default {
         return [...this.posts].sort((p1, p2) => p1[this.selectedSort].localeCompare(p2[this.selectedSort]));
       }
       return this.posts;
+    },
+    sortedAndSearchedPosts() {
+      if (this.searchQuery) {
+        return this.sortedPosts.filter(p => p.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
+      }
+      return this.sortedPosts;
     }
   },
   watch: {}
@@ -100,6 +103,10 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+  flex-wrap: wrap;
+}
+.highlight {
+  background-color: #FFEA8A;
 }
 @media screen and (max-width: 480px) {
   .top-bar {

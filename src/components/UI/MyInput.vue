@@ -1,5 +1,5 @@
 <template>
-  <input class="input" type="text" :value="modelValue" @input="updateInput">
+  <input class="input" type="text" :class="customClass" :value="modelValue" @input="updateInput">
 </template>
 
 <script>
@@ -7,6 +7,10 @@ export default {
   name: 'MyInput',
   props: {
     modelValue: [String, Number],
+    customClass: {
+      type: String,
+      default: ''
+    }
   },
   methods: {
     updateInput(event) {
@@ -29,5 +33,8 @@ export default {
   &::placeholder {
     color: #B8BCCA;
   }
+}
+.input_search {
+  margin: 20px 0 10px;
 }
 </style>

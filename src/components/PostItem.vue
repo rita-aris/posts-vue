@@ -1,7 +1,7 @@
 <template>
   <div class="post">
     <div>
-      <div><strong>{{ post.title }}</strong></div>
+      <div><strong><span v-html="highlightText(post.title, searchQuery)"></span></strong></div>
       <div>{{ post.body }}</div>
     </div>
     <div class="post__btns">
@@ -16,6 +16,17 @@ export default {
     post: {
       type: Object,
       required: true
+    },
+    searchQuery: {
+      type: String,
+      default: ''
+    }
+  },
+  methods: {
+    highlightText(text, query) {
+      if (!query) return text;
+      const regex = new RegExp(`(${query})`, 'gi');
+      return text.replace(regex, '<span class="highlight">$1</span>');
     }
   }
 }
