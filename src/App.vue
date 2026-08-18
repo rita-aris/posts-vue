@@ -11,6 +11,7 @@
     </MyModal>
     <PostsList :posts="sortedAndSearchedPosts" @remove="removePost" v-if="!isPostsLoading" :searchQuery="searchQuery" />
     <MyLoader v-else />
+    <MyPagination :totalPages="totalPages" :page="page" @change="changePage" />
   </div>
 </template>
 
@@ -32,7 +33,10 @@ export default {
       sortOptions: [
         {value: 'title', name: 'По названию'},
         {value: 'body', name: 'По описанию'},
-      ]
+      ],
+      page: 1,
+      limit: 10,
+      totalPages: 0,
     }
   },
   methods: {
@@ -49,13 +53,17 @@ export default {
     async fetchPosts() {
       try {
         this.isPostsLoading = true;
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=10');
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${this.limit}&_page=${this.page}`);
+        this.totalPages = Math.ceil(response.headers.get('X-Total-Count') / this.limit);
         this.posts = await response.json();
       } catch (e) {
         console.error(e);
       } finally {
         this.isPostsLoading = false;
       }
+    },
+    changePage(pageNumber) {
+      this.page = pageNumber;
     }
   },
   mounted() {
@@ -75,7 +83,11 @@ export default {
       return this.sortedPosts;
     }
   },
-  watch: {}
+  watch: {
+    page() {
+      this.fetchPosts();
+    }
+  }
 }
 </script>
 

@@ -40,6 +40,14 @@
                 "kind": "expression",
                 "type": "string|number"
               }
+            },
+            {
+              "name": "customClass",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              },
+              "default": "''"
             }
           ],
           "events": [
@@ -85,6 +93,37 @@
           ],
           "source": {
             "module": "./src/components/UI/MyModal.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "MyPagination",
+          "description": "",
+          "attributes": [
+            {
+              "name": "totalPages",
+              "required": true,
+              "value": {
+                "kind": "expression",
+                "type": "number"
+              }
+            },
+            {
+              "name": "page",
+              "required": true,
+              "value": {
+                "kind": "expression",
+                "type": "number"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "change"
+            }
+          ],
+          "source": {
+            "module": "./src/components/UI/MyPagination.vue",
             "symbol": "default"
           }
         },
@@ -142,6 +181,14 @@
                 "kind": "expression",
                 "type": "object"
               }
+            },
+            {
+              "name": "searchQuery",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              },
+              "default": "''"
             }
           ],
           "events": [
@@ -165,6 +212,14 @@
                 "kind": "expression",
                 "type": "array"
               }
+            },
+            {
+              "name": "searchQuery",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              },
+              "default": "''"
             }
           ],
           "events": [

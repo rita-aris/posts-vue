@@ -3,11 +3,13 @@ import MyInput from "@/components/UI/MyInput.vue";
 import MyModal from "@/components/UI/MyModal.vue";
 import MyLoader from "@/components/UI/MyLoader.vue";
 import MySelect from "@/components/UI/MySelect.vue";
+import MyPagination from "@/components/UI/MyPagination.vue";
 
 export default [
     MyButton,
     MyInput,
     MyModal,
     MyLoader,
-    MySelect
+    MySelect,
+    MyPagination
 ]
