@@ -11,7 +11,9 @@
     </MyModal>
     <PostsList :posts="sortedAndSearchedPosts" @remove="removePost" v-if="!isPostsLoading" :searchQuery="searchQuery" />
     <MyLoader v-else />
-    <MyPagination :totalPages="totalPages" :page="page" @change="changePage" />
+    <!--Если нужна постраничная пагинация, добавь компонент MyPagination, функции changePage, page -->
+    <!--<MyPagination :totalPages="totalPages" :page="page" @change="changePage" />-->
+    <div class="observer" ref="observer"></div>
   </div>
 </template>
 
@@ -62,12 +64,34 @@ export default {
         this.isPostsLoading = false;
       }
     },
-    changePage(pageNumber) {
-      this.page = pageNumber;
-    }
+    async loadMorePosts() {
+      try {
+        this.page = this.page + 1;
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${this.limit}&_page=${this.page}`);
+        this.totalPages = Math.ceil(response.headers.get('X-Total-Count') / this.limit);
+        const posts = await response.json();
+        this.posts = [...this.posts, ...posts];
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    // changePage(pageNumber) {
+    //   this.page = pageNumber;
+    // }
   },
   mounted() {
     this.fetchPosts();
+    const options = {
+      rootMargin: "0px",
+      threshold: 1.0,
+    };
+    const callback = (entries) => {
+      if (entries[0].isIntersecting && this.page < this.totalPages) {
+        this.loadMorePosts();
+      }
+    };
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(this.$refs.observer);
   },
   computed: {
     sortedPosts() {
@@ -84,9 +108,9 @@ export default {
     }
   },
   watch: {
-    page() {
-      this.fetchPosts();
-    }
+    // page() {
+    //   this.fetchPosts();
+    // }
   }
 }
 </script>
@@ -119,6 +143,9 @@ body {
 }
 .highlight {
   background-color: #FFEA8A;
+}
+.observer {
+  height: 30px;
 }
 @media screen and (max-width: 480px) {
   .top-bar {
