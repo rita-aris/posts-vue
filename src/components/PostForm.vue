@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent>
     <h2>Создание поста</h2>
-    <MyInput placeholder="Название" v-model="post.title" />
+    <MyInput placeholder="Название" v-model="post.title" v-focus />
     <MyInput placeholder="Описание" v-model="post.body" />
     <MyButton customClass="btn_end" @click="createPost" :disabled="!isFormValid">Создать</MyButton>
   </form>

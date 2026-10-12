@@ -4,6 +4,26 @@
   "version": "0.1.0",
   "contributions": {
     "html": {
+      "vue-directives": [
+        {
+          "name": "intersection",
+          "description": "loading additional posts",
+          "doc-url": "",
+          "attribute-value": {
+            "type": "boolean",
+            "required": false
+          }
+        },
+        {
+          "name": "focus",
+          "description": "focus for input",
+          "doc-url": "",
+          "attribute-value": {
+            "type": "boolean",
+            "required": false
+          }
+        }
+      ],
       "description-markup": "markdown",
       "types-syntax": "typescript",
       "tags": [
@@ -154,6 +174,14 @@
           ],
           "source": {
             "module": "./src/components/UI/MySelect.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "Navbar",
+          "description": "",
+          "source": {
+            "module": "./src/components/Navbar.vue",
             "symbol": "default"
           }
         },

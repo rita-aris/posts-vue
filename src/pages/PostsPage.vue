@@ -2,7 +2,7 @@
   <div>
     <h1>Страница с постами</h1>
     <div class="top-bar">
-      <MyInput customClass="input_search" placeholder="Поиск по названию..." v-model="searchQuery" />
+      <MyInput customClass="input_search" placeholder="Поиск по названию..." v-model="searchQuery" v-focus />
       <MyButton @click="showModal">Создать пост</MyButton>
       <MySelect v-model="selectedSort" :options="sortOptions" v-if="sortedAndSearchedPosts.length > 0" />
     </div>
@@ -13,7 +13,7 @@
     <MyLoader v-else />
     <!--Если нужна постраничная пагинация, добавь компонент MyPagination, функции changePage, page -->
     <!--<MyPagination :totalPages="totalPages" :page="page" @change="changePage" />-->
-    <div class="observer" ref="observer"></div>
+    <div class="observer" v-intersection="loadMorePosts"></div>
   </div>
 </template>
 
@@ -81,17 +81,6 @@ export default {
   },
   mounted() {
     this.fetchPosts();
-    const options = {
-      rootMargin: "0px",
-      threshold: 1.0,
-    };
-    const callback = (entries) => {
-      if (entries[0].isIntersecting && this.page < this.totalPages) {
-        this.loadMorePosts();
-      }
-    };
-    const observer = new IntersectionObserver(callback, options);
-    observer.observe(this.$refs.observer);
   },
   computed: {
     sortedPosts() {
